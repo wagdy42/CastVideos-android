@@ -1,9 +1,8 @@
-# cast-videos-android
+# CastVideos-android
 
 CastVideos-android application shows how to cast videos from an android device in a way that is fully compliant with the Design Checklist. 
 
 ## Dependencies
-* google-play-services_lib library from the Android SDK (at least version 4.2.34)
 * cast-companion-android : can be downloaded here at https://github.com/googlecast/CastCompanionLibrary-android
 
 ## Setup Instructions
