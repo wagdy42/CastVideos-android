@@ -27,3 +27,4 @@ proguard-project.txt
 .project
 .classpath
 .settings/
+project.properties
