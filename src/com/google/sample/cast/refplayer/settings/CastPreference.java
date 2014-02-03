@@ -29,7 +29,6 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class CastPreference extends PreferenceActivity
         implements OnSharedPreferenceChangeListener {
@@ -37,11 +36,14 @@ public class CastPreference extends PreferenceActivity
     public static final String APP_DESTRUCTION_KEY = "application_destruction";
     public static final String FTU_SHOWN_KEY = "ftu_shown";
     public static final String VOLUME_SELCTION_KEY = "volume_target";
-    private static final String TAG = "CastPreference";
-    private ListPreference mListPreference;
+    public static final String TERMINATION_POLICY_KEY = "termination_policy";
+    public static final String STOP_ON_DISCONNECT = "1";
+    public static final String CONTINUE_ON_DISCONNECT = "0";
+    private ListPreference mVolumeListPreference;
     private SharedPreferences mPrefs;
     private VideoCastManager mCastManager;
     boolean mStopOnExit;
+    private ListPreference mTerminationListPreference;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -50,19 +52,25 @@ public class CastPreference extends PreferenceActivity
         addPreferencesFromResource(R.xml.application_preference);
         getPreferenceScreen().getSharedPreferences().
                 registerOnSharedPreferenceChangeListener(this);
-
-        mListPreference = (ListPreference) getPreferenceScreen()
-                .findPreference(VOLUME_SELCTION_KEY);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String value = mPrefs.getString(
-                VOLUME_SELCTION_KEY, getString(R.string.prefs_volume_default));
-        String summary = getResources().getString(R.string.prefs_volume_title_summary, value);
-        mListPreference.setSummary(summary);
         mCastManager = CastApplication.getCastManager(this);
+
+        // -- Termination Policy -------------------//
+        mTerminationListPreference = (ListPreference) getPreferenceScreen().findPreference(
+                TERMINATION_POLICY_KEY);
+        mTerminationListPreference.setSummary(getTerminationSummary(mPrefs));
+        mCastManager.setStopOnDisconnect(mStopOnExit);
+
+        // -- Volume settings ----------------------//
+        mVolumeListPreference = (ListPreference) getPreferenceScreen()
+                .findPreference(VOLUME_SELCTION_KEY);
+        String volValue = mPrefs.getString(
+                VOLUME_SELCTION_KEY, getString(R.string.prefs_volume_default));
+        String volSummary = getResources().getString(R.string.prefs_volume_title_summary, volValue);
+        mVolumeListPreference.setSummary(volSummary);
+
         EditTextPreference versionPref = (EditTextPreference) findPreference("app_version");
         versionPref.setTitle(getString(R.string.version, Utils.getAppVersionName(this)));
-        mStopOnExit = mPrefs.getBoolean(APP_DESTRUCTION_KEY, false);
-        mCastManager.setStopOnDisconnect(mStopOnExit);
     }
 
     public static boolean isDestroyAppOnDisconnect(Context ctx) {
@@ -76,12 +84,19 @@ public class CastPreference extends PreferenceActivity
         if (VOLUME_SELCTION_KEY.equals(key)) {
             String value = sharedPreferences.getString(VOLUME_SELCTION_KEY, "");
             String summary = getResources().getString(R.string.prefs_volume_title_summary, value);
-            mListPreference.setSummary(summary);
-        } else if (APP_DESTRUCTION_KEY.equals(key)) {
-            mStopOnExit = sharedPreferences.getBoolean(APP_DESTRUCTION_KEY, false);
-            Log.d(TAG, "destroyOnDisconnect: " + mStopOnExit);
+            mVolumeListPreference.setSummary(summary);
+        } else if (TERMINATION_POLICY_KEY.equals(key)) {
+            mTerminationListPreference.setSummary(getTerminationSummary(sharedPreferences));
             mCastManager.setStopOnDisconnect(mStopOnExit);
         }
+    }
+
+    private String getTerminationSummary(SharedPreferences sharedPreferences) {
+        String valueStr = sharedPreferences.getString(TERMINATION_POLICY_KEY, "0");
+        String[] labels = getResources().getStringArray(R.array.prefs_termination_policy_names);
+        int value = CONTINUE_ON_DISCONNECT.equals(valueStr) ? 0 : 1;
+        mStopOnExit = value == 0 ? false : true;
+        return labels[value];
     }
 
     public static boolean isFtuShown(Context ctx) {

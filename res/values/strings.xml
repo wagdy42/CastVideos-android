@@ -46,9 +46,8 @@
     <!-- Preferences -->
     <string name="prefs_header_application">Application Behavior</string>
     <string name="prefs_header_application_summary">Control how the application behaves on the TV</string>
-    <string name="prefs_destroy_app_on_disconnect">Application Termination</string>
-    <string name="prefs_destroy_app_on_disconnect_on">Terminate the application on TV upon disconnection</string>
-    <string name="prefs_destroy_app_on_disconnect_off">Let the application continue running on TV when you disconnect</string>
+    <string name="prefs_termination_policy_default">0</string>
+    <string name="prefs_termination_policy_dialog_title">When Disconnecting</string>
     <string name="prefs_volume_title">Volume Assignment</string>
     <string name="prefs_volume_title_summary">Controls %1$s</string>
     <string name="prefs_volume_dialog_title">Volume Assignment</string>

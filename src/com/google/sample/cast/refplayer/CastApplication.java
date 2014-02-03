@@ -57,9 +57,10 @@ public class CastApplication extends Application {
 
         }
         mCastMgr.setContext(context);
-        boolean destroyOnExit = Utils.getBooleanFromPreference(mAppContext,
-                CastPreference.APP_DESTRUCTION_KEY, false);
-        mCastMgr.setStopOnDisconnect(destroyOnExit);
+        String destroyOnExitStr = Utils.getStringFromPreference(context,
+                CastPreference.TERMINATION_POLICY_KEY);
+        mCastMgr.setStopOnDisconnect(null != destroyOnExitStr
+                && CastPreference.STOP_ON_DISCONNECT.equals(destroyOnExitStr));
         return mCastMgr;
     }
 
