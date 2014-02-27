@@ -16,6 +16,9 @@
 
 package com.google.sample.cast.refplayer.browser;
 
+import android.net.Uri;
+import android.util.Log;
+
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.common.images.WebImage;
@@ -23,9 +26,6 @@ import com.google.android.gms.common.images.WebImage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.net.Uri;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

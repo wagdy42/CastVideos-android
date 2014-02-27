@@ -98,8 +98,6 @@ public class VideoBrowserActivity extends ActionBarActivity {
             }
         };
 
-        // -- Registering to some cast events
-        mCastManager.addVideoCastConsumer(mCastConsumer);
         setupActionBar(actionBar);
         mCastManager.reconnectSessionIfPossible(this, false);
     }

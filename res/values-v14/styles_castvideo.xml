@@ -57,5 +57,35 @@
         <item name="android:popupMenuStyle">@style/PopupMenu.Castvideo</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Castvideo</item>
     </style>
+    
+    <style name="Theme.CastVideoOverlay" parent="@style/Theme.Castvideo">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Transparent.CastVideoOverlay</item>
+    </style>
+
+    <style name="ActionBar.Transparent.CastVideoOverlay" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@drawable/ab_solid_democast</item>
+        <item name="android:titleTextStyle">@style/WhiteText</item>
+        <!-- item name="progressBarStyle">@style/ProgressBar.CastVideoOverlay</item -->
+    </style>
+
+    <style name="WhiteText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+    <style name="Theme.CastVideoOverlayYellow" parent="@style/Theme.CastVideoOverlay">
+        <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
+    </style>
+    
+    <style name="SeekBarAppTheme" parent="android:Widget.SeekBar">
+        <item name="android:progressDrawable">@drawable/apptheme_scrubber_progress_horizontal_holo_light</item>
+        <item name="android:indeterminateDrawable">@drawable/apptheme_scrubber_progress_horizontal_holo_light</item>
+        <item name="android:minHeight">13dip</item>
+        <item name="android:maxHeight">13dip</item>
+        <item name="android:thumb">@drawable/apptheme_scrubber_control_selector_holo_light</item>
+        <item name="android:thumbOffset">16dip</item>
+        <item name="android:paddingLeft">16dip</item>
+        <item name="android:paddingRight">16dip</item>
+    </style>
 
 </resources>

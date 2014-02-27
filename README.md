@@ -24,3 +24,10 @@ Please read and follow the steps in the CONTRIBUTING.md
 
 ## License
 See LICENSE
+
+## Change List
+ * Added gradle build scripts (make sure you have Android Support Repository). Since it depends on the
+   CastCompanionLibrary, make sure you update build.gradle and settings.gradle to point to your CastCompanionLibrary.
+ * Included a published app id in the res/values/strings.xml file so the project can be built and run without a need
+   to register an app id. If you want to use your own receiver, update "app_id" in that file with your own app id.
+ 
