@@ -1,13 +1,13 @@
 # CastVideos-android
 
-CastVideos-android application shows how to cast videos from an android device in a way that is fully compliant with the Design Checklist. 
+CastVideos-android application shows how to cast videos from an android device in a way that is fully compliant with the Design Checklist.
 
 ## Dependencies
 * cast-companion-android : can be downloaded here at https://github.com/googlecast/CastCompanionLibrary-android
 
 ## Setup Instructions
 * Get a Chromecast device and set it up
-* Register an application on the Developers Console (http://cast.google.com/publish). The easiest would be to use the Styled Media Receiver option there. 
+* Register an application on the Developers Console (http://cast.google.com/publish). The easiest would be to use the Styled Media Receiver option there.
 You will get an App ID when you finish registering your application.
 * Setup the project dependencies
 * Insert your App ID in the strings.xml in the res directory of the project (look for `YOUR_APP_ID` in that file)
@@ -31,5 +31,7 @@ Google Cast Developers Community on Google+ [http://goo.gl/TPLDxj](http://goo.gl
 ## Change List
  * Added gradle build scripts (make sure you have Android Support Repository). Since it depends on the
    CastCompanionLibrary, make sure you update build.gradle and settings.gradle to point to your CastCompanionLibrary.
- * Included a published app id in the res/values/strings.xml file so the project can be built and run without a need
-   to register an app id. If you want to use your own receiver, update "app_id" in that file with your own app id.
+ * ~~Included a published app id in the res/values/strings.xml file so the project can be built and run without a need
+   to register an app id. If you want to use your own receiver, update "app_id" in that file with your own app id.~~
+ * (Temporary) The pre-configured App Id has been removed temporarily; it will be brought back soon to conform to some
+   internal policies.
