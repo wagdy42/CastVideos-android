@@ -1,0 +1,22 @@
+private void teardown() {
+  if (mApiClient != null) {
+    if (mApplicationStarted) {
+      try {
+        Cast.CastApi.stopApplication(mApiClient);
+        if (mHelloWorldChannel != null) {          
+          Cast.CastApi.removeMessageReceivedCallbacks(mApiClient,
+            mHelloWorldChannel.getNamespace());
+          mHelloWorldChannel = null;
+        }
+      } catch (IOException e) {
+        Log.e(TAG, "Exception while removing application", e);
+      }
+      mApplicationStarted = false;
+    }
+    if (mApiClient.isConnected()) {
+      mApiClient.disconnect();
+    }
+    mApiClient = null;
+  }
+  mSelectedDevice = null;
+}
